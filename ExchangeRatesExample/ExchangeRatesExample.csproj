@@ -70,7 +70,11 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExchangeRateLogic.cs" />
+    <Compile Include="ExchangeRateViewModel.cs" />
+    <Compile Include="IExchangeRateLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web_dis_rates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
