@@ -74,6 +74,8 @@
     <Compile Include="ExchangeRateViewModel.cs" />
     <Compile Include="IExchangeRateLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\XmlParser\IXmlParser.cs" />
+    <Compile Include="Utility\XmlParser\XmlParser.cs" />
     <Compile Include="Web_dis_rates.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +87,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

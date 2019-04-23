@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
-using System.Xml.Serialization;
+using ExchangeRatesExample.Utility.XmlParser;
 
 namespace ExchangeRatesExample
 {
@@ -14,7 +12,13 @@ namespace ExchangeRatesExample
         private const string UsdSwiftCode = "USD";
 
         private const string EurSwiftCode = "EUR";
-        
+
+        private readonly IXmlParser<web_dis_rates> _xmlParser;
+
+        public ExchangeRateLogic(IXmlParser<web_dis_rates> xmlParser)
+        {
+            _xmlParser = xmlParser;
+        }
 
         public List<ExchangeRateViewModel> GetUsdAndEurExchangeRates()
         {
@@ -25,29 +29,9 @@ namespace ExchangeRatesExample
 
         public web_dis_rates GetRawExchangeRatesData()
         {
-            XDocument doc = ReadXmlData(InputXmlPath);
-            web_dis_rates exchangeRateData = MapToModel(doc);
+            XDocument doc = _xmlParser.ReadXmlData(InputXmlPath);
+            web_dis_rates exchangeRateData = _xmlParser.MapToModel(doc);
             return exchangeRateData;
-        }
-
-        public XDocument ReadXmlData(string filePath)
-        {
-            filePath = GetRelativeFilePath(filePath);
-            XDocument doc = XDocument.Load(filePath);
-
-            return doc;
-        }
-
-        public web_dis_rates MapToModel(XDocument doc)
-        {
-            XmlSerializer s = new XmlSerializer(typeof(web_dis_rates));
-            return (web_dis_rates)s.Deserialize(doc.CreateReader());
-        }
-
-        private string GetRelativeFilePath(string filePath)
-        {
-            var outPutDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase);
-            return Path.Combine(outPutDirectory, filePath);
         }
     }
 }
